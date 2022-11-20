@@ -183,15 +183,12 @@
             @change="onChange($event)"
         />
     </label>
-    <label class="pref" for="chkSkipSponsors">
-        <strong v-t="'actions.skip_sponsors'" />
-        <select id="chkSkipSponsors" v-model="skipSponsor" @change="onChange($event)">
-            <option value="off">Disable</option>
-            <option value="skip">Auto Skip</option>
-            <option value="manual">Manual Skip</option>
-            <option value="show">Show</option>
-        </select>
-    </label>
+    <SponsorBlockSetting
+        :setting="'chkSkipSponsors'"
+        :model="'skipSponsor'"
+        :label="'actions.skip_sponsors'"
+        :change="onChange"
+    />
     <label class="pref" for="chkSkipIntro">
         <strong v-t="'actions.skip_intro'" />
         <select id="chkSkipIntro" v-model="skipIntro" @change="onChange($event)">
@@ -379,7 +376,11 @@
 
 <script>
 import CountryMap from "@/utils/CountryMaps/en.json";
+import SponsorBlockSetting from "./SponsorBlockSetting.vue";
 export default {
+    components: {
+        SponsorBlockSetting,
+    },
     data() {
         return {
             selectedInstance: null,
